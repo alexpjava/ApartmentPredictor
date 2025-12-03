@@ -26,6 +26,10 @@ From source:
 
 > We are defining a CRUD service in Spring Boot for Apartment, Owners, Reviewers and Post entities, then test them to list, create, edit, delete, and assign posts to apartments with <mark>JUnit</mark>.
 
+## Project commits
+
+- [Commits · AlbertProfe/ApartmentPredictor · GitHub](https://github.com/AlbertProfe/ApartmentPredictor/commits/master/)
+
 ## Create project
 
 ### Using the CLI
