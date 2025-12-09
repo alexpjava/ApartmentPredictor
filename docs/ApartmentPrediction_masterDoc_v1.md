@@ -130,7 +130,6 @@ $ tree
                     └── ApartmentPredictorApplicationTests.java
 
 17 directories, 11 files
-
 ```
 
 ## Data Model
@@ -205,8 +204,6 @@ public class Review {
 }
 ```
 
-
-
 ### UML
 
 Here are very brief, concrete `restaurant-related` examples for each **UML** class diagram relationship in [Class diagrams | Mermaid](https://mermaid.js.org/syntax/classDiagram.html):
@@ -264,23 +261,145 @@ Chef .. Kitchen : Link(Dashed)
 > 
 > The goal is to validate application logic and data access without external infrastructure, enabling fast, isolated tests.
 
-![](https://raw.githubusercontent.com/AlbertProfe/ApartmentPredictor/refs/heads/master/docs/diagrams/mc_v1.png)
+![](https://raw.githubusercontent.com/AlbertProfe/ApartmentPredictor/refs/heads/master/docs/diagrams/mc_uml-junittest_v1.png)
 
 ### Service
 
-todo
+> The [ApartmentService.java](cci:7://file:///home/albert/MyProjects/Sandbox/ApartmentPredictorProject/ApartmentPredictor/src/main/java/com/example/apartment_predictor/service/ApartmentService.java:0:0-0:0) is a Spring service class annotated with `@Service` that provides <mark>business logic for apartment operations</mark>. 
+> 
+> It contains method stubs for CRUD operations including [findAll()](cci:1://file:///home/albert/MyProjects/Sandbox/ApartmentPredictorProject/ApartmentPredictor/src/main/java/com/example/apartment_predictor/service/ApartmentService.java:10:4-15:5), [createApartment()](cci:1://file:///home/albert/MyProjects/Sandbox/ApartmentPredictorProject/ApartmentPredictor/src/main/java/com/example/apartment_predictor/service/ApartmentService.java:18:4-18:35), [updateApartment()](cci:1://file:///home/albert/MyProjects/Sandbox/ApartmentPredictorProject/ApartmentPredictor/src/main/java/com/example/apartment_predictor/service/ApartmentService.java:20:4-20:36), [deleteApartment()](cci:1://file:///home/albert/MyProjects/Sandbox/ApartmentPredictorProject/ApartmentPredictor/src/main/java/com/example/apartment_predictor/service/ApartmentService.java:22:4-22:36), and [findApartmentById()](cci:1://file:///home/albert/MyProjects/Sandbox/ApartmentPredictorProject/ApartmentPredictor/src/main/java/com/example/apartment_predictor/service/ApartmentService.java:24:4-24:38). 
 
 ### Respository
 
-todo
+The [ApartmentRepository.java](cci:7://file:///home/albert/MyProjects/Sandbox/ApartmentPredictorProject/ApartmentPredictor/src/main/java/com/example/apartment_predictor/repository/ApartmentRepository.java:0:0-0:0) is a `Spring Data `repository interface that extends `CrudRepository<Apartment, String>`. 
+
+This provides basic `CRUD` (Create, Read, Update, Delete) operations for the `Apartment` entity with a String-type primary key. The interface is empty, relying on Spring Data's automatic implementation to handle standard database operations like `save()`, `findById()`, `findAll()`, and `deleteById()`. 
+
+> The repository serves as the data access layer for apartment-related operations in the apartment predictor application.
 
 ### Command LIne Runner
 
-todo
+> The [ApartmentPredictorApplication](cci:2://file:///home/albert/MyProjects/Sandbox/ApartmentPredictorProject/ApartmentPredictor/src/main/java/com/example/apartment_predictor/ApartmentPredictorApplication.java:9:0-126:1) implements `CommandLineRunner`, which <mark>executes code after the Spring Boot application starts</mark>. 
+
+The **CommandLineRunner** serves as a data initialization mechanism, populating the database with test data upon application startup.
+
+```java
+package com.example.apartment_predictor;
+
+import com.example.apartment_predictor.model.Apartment;
+import com.example.apartment_predictor.repository.ApartmentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class ApartmentPredictorApplication implements CommandLineRunner {
+
+    @Autowired
+    private ApartmentRepository apartmentRepository;
+
+
+	public static void main(String[] args) {
+		SpringApplication.run(ApartmentPredictorApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		System.out.println("Creating apartment objects...");
+		
+		// Create apartment objects based on your sample data
+		Apartment apartment1 = new Apartment(
+				13300000L,    // price
+				7420,         // area
+				4,            // bedrooms
+				2,            // bathrooms
+				3,            // stories
+				"yes",        // mainroad
+				"no",         // guestroom
+				"no",         // basement
+				"no",         // hotwater
+				"yes",        // heating
+				"yes",        // airconditioning
+				2,            // parking
+				"yes",        // prefarea
+				"furnished"   // furnishingstatus
+		);
+
+
+		
+		// Create additional sample apartments
+		Apartment apartment2 = new Apartment(
+				8500000L,     // price
+				5200,         // area
+				3,            // bedrooms
+				2,            // bathrooms
+				2,            // stories
+				"yes",        // mainroad
+				"yes",        // guestroom
+				"no",         // basement
+				"yes",        // hotwater
+				"no",         // heating
+				"yes",        // airconditioning
+				1,            // parking
+				"no",         // prefarea
+				"semi-furnished" // furnishingstatus
+		);
+		
+		Apartment apartment3 = new Apartment(
+				6200000L,     // price
+				3800,         // area
+				2,            // bedrooms
+				1,            // bathrooms
+				1,            // stories
+				"no",         // mainroad
+				"no",         // guestroom
+				"yes",        // basement
+				"yes",        // hotwater
+				"no",         // heating
+				"no",         // airconditioning
+				0,            // parking
+				"yes",        // prefarea
+				"unfurnished" // furnishingstatus
+		);
+		
+        apartmentRepository.save(apartment1);
+        apartmentRepository.save(apartment2);
+        apartmentRepository.save(apartment3);
+
+        int index = 0;
+        System.out.println("\n=== Apartments in the Database ===");
+        for (Apartment apartment : apartmentRepository.findAll()){
+            index++;
+            System.out.println("#" + index);
+            System.out.println(apartment);
+        }
+
+        //apartmentRepository.findAll().forEach(System.out::println);
+	}
+	
+	
+}
+
+```
 
 ### Tests JUnit
 
 todo
+
+## JPA
+
+- [Getting Started :: Spring Data JPA](https://docs.spring.io/spring-data/jpa/reference/jpa/getting-started.html)
+
+- [Core concepts :: Spring Data JPA](https://docs.spring.io/spring-data/jpa/reference/repositories/core-concepts.html)
+
+- [Spring Boot: Data &amp; DB – albertprofe wiki](https://albertprofe.dev/springboot/boot-concepts-data.html)
+
+Spring Data’s mission is to provide a familiar and consistent, **Spring-based programming model for data access**.
+
+> It makes it easy to use **data access** technologies, `relational` and `non-relational` databases, `map-reduce frameworks`, and `cloud-based` data services.
+
+This is an **umbrella project which contains many subprojects** that are specific to a given database. The projects are developed by working together with many of the companies and developers that are behind these exciting technologies.
 
 ## H2 & application.properties
 
@@ -345,6 +464,12 @@ Database Dialect and DDL
 - **`spring.jpa.database-platform=org.hibernate.dialect.H2Dialect`** - Tells Hibernate to use H2-specific SQL syntax
 - **`spring.jpa.show-sql=true`** - Enables SQL query logging for debugging
 - **`spring.jpa.hibernate.ddl-auto=update`** - Automatically updates database schema without dropping existing data (safer than `create` which recreates tables)
+
+> **DDL - Data Definition Language**
+> 
+> <mark>DDL (Data Definition Language)</mark> consists of SQL commands that can be used for defining, altering and deleting database structures such as tables, indexes and schemas. It simply deals with descriptions of the database schema and is used to create and modify the structure of database objects in the database
+
+![](https://raw.githubusercontent.com/AlbertProfe/ApartmentPredictor/refs/heads/master/docs/diagrams/sql-env.jpg)
 
 ## Maven
 
@@ -463,3 +588,5 @@ Database Dialect and DDL
       Java version: 21.0.8, vendor: Ubuntu, runtime: /usr/lib/jvm/java-21-openjdk-amd64
       Default locale: en_US, platform encoding: UTF-8
       OS name: "linux", version: "6.8.0-83-generic", arch: "amd64", family: "unix"
+
+- <mark>Spring Data JPA 4.0.0</mark>
