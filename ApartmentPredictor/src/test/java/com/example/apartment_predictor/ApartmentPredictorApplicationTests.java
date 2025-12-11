@@ -42,6 +42,7 @@ class ApartmentPredictorApplicationTests {
         review1.setRating(5);
         review1.setTitle("Nice Apartment in Fifth Avenue");
         review1.setReviewDate(LocalDate.now());
+        review1.setApartment(apartment1);
 
         reviewRepository.save(review1);
 

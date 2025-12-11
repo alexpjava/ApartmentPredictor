@@ -86,14 +86,14 @@ public class Review {
         this.reviewDate = reviewDate;
     }
 
-    /*public Apartment getApartment() {
+    public Apartment getApartment() {
         return apartment;
     }
 
     public void setApartment(Apartment apartment) {
         this.apartment = apartment;
     }
-*/
+
     @Override
     public String toString() {
         return "Review{" +
