@@ -11,19 +11,10 @@ public class Apartment extends ResidentialProperty{
 
     @Id
     protected String id;
-    private Long price;
-    protected Integer area;
-    protected Integer bedrooms;
-    private Integer bathrooms;
     private Integer stories;
-    private String mainroad;
-    private String guestroom;
-    private String basement;
-    private String hotwaterheating;
-    private String airconditioning;
-    private Integer parking;
-    private String prefarea;
-    private String furnishingstatus;
+    boolean balcony;
+
+
 
     @OneToMany(
             mappedBy = "apartment",
@@ -234,7 +225,7 @@ public class Apartment extends ResidentialProperty{
      */
 
     @Override
-    public double calculateRenovationCost(boolean balcony, double costXm4){
+    public double calculateRenovationCost( double costXm4){
 
         double priceReform = costXm4 * area;
         if (balcony){
