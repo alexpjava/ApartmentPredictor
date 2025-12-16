@@ -183,6 +183,7 @@ public class Apartment {
         this.id = id;
     }*/
 
+
    public List<Review> getReviews() {
         return reviews;
     }
@@ -210,5 +211,16 @@ public class Apartment {
                 ", furnishingstatus='" + furnishingstatus + '\'' +
                 ", reviews='" + reviews.size() + '\'' +
                 '}';
+    }
+
+    //METODES
+
+    public double calculateRenovationCost(boolean balcony, double costXm4){
+
+       double priceReform = costXm4 * area;
+       if (balcony){
+          priceReform = priceReform * 1.5;
+       }
+       return priceReform;
     }
 }

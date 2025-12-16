@@ -52,4 +52,16 @@ public class House extends Apartment {
                 ", garden='" + garden + '\'' +
                 '}';
     }
+
+    @Override
+    public double calculateRenovationCost(double costXm4, boolean garage, boolean pool, boolean basement){
+
+        double priceReform = 0;
+        boolean
+
+        priceReform = super.calculateRenovationCost(false, costXm4);
+        if (ba)
+
+        return priceReform;
+    }
 }
