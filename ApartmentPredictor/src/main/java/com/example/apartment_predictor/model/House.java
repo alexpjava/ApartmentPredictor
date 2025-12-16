@@ -2,7 +2,7 @@ package com.example.apartment_predictor.model;
 
 import java.util.UUID;
 
-public class House extends Apartment {
+public class House extends SingleFamilyHome {
 
     private int garageQty;
     private String roofType;

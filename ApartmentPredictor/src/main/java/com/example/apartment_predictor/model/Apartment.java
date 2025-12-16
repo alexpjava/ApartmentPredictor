@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-public class Apartment {
+public class Apartment extends ResidentialProperty{
 
     @Id
     protected String id;
@@ -217,4 +217,31 @@ public class Apartment {
                 ", reviews='" + reviews.size() + '\'' +
                 '}';
     }
+
+    // Methods
+
+    /**
+     * Calculates the renovation cost for the apartment.
+     * <p>
+     * This method provides a default renovation cost calculation based on
+     * the apartment area and optional features.
+     * Subclasses are expected to override this method to provide
+     * specific renovation cost logic according to their own requirements.
+     *
+     * @param balcony indicates whether the apartment has a balcony
+     * @param costXm4 renovation cost per square meter
+     * @return the calculated renovation cost
+     */
+
+    @Override
+    public double calculateRenovationCost(boolean balcony, double costXm4){
+
+        double priceReform = costXm4 * area;
+        if (balcony){
+            priceReform = priceReform * 1.5;
+        }
+        return priceReform;
+    }
+
+
 }

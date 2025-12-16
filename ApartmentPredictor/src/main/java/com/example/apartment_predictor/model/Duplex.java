@@ -2,7 +2,7 @@ package com.example.apartment_predictor.model;
 
 import java.util.UUID;
 
-public class Duplex extends Apartment {
+public class Duplex extends SingleFamilyHome {
 
     private String balcony;
     private boolean elevator;
