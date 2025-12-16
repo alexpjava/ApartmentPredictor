@@ -21,9 +21,8 @@ public abstract class ResidentialProperty extends Property {
     private String mainroad;
     private String prefarea;
 
-    public ResidentialProperty(String id, Integer bedrooms, Integer bathrooms, String guestroom, String hotwaterHeating, String airconditioning, Integer parking, String furnishingstatus, String basement, String mainroad, String prefarea) {
+    public ResidentialProperty(Integer bedrooms, Integer bathrooms, String guestroom, String hotwaterHeating, String airconditioning, Integer parking, String furnishingstatus, String basement, String mainroad, String prefarea) {
         super();
-        this.id = id;
         //this.id = UUID.randomUUID().toString();
         this.bedrooms = bedrooms;
         this.bathrooms = bathrooms;
