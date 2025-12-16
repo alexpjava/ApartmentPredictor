@@ -7,6 +7,25 @@ public class House extends Apartment {
     private int garageQty;
     private String roofType;
     private String garden;
+    private int poolQty;
+
+    public int getPoolQty() {
+        return poolQty;
+    }
+
+    public void setPoolQty(int poolQty) {
+        this.poolQty = poolQty;
+    }
+
+    public int getBasementQyy() {
+        return basementQyy;
+    }
+
+    public void setBasementQyy(int basementQyy) {
+        this.basementQyy = basementQyy;
+    }
+
+    private int basementQyy;
 
     public House() {
         this.id = UUID.randomUUID().toString();
@@ -46,21 +65,23 @@ public class House extends Apartment {
     @Override
     public String toString() {
         return "House{" +
-                "id=" + id +
-                ", garageQty=" + garageQty +
+                "garageQty=" + garageQty +
                 ", roofType='" + roofType + '\'' +
                 ", garden='" + garden + '\'' +
+                ", poolQty=" + poolQty +
+                ", basementQyy=" + basementQyy +
+                ", id='" + id + '\'' +
                 '}';
     }
 
     @Override
-    public double calculateRenovationCost(double costXm4, boolean garage, boolean pool, boolean basement){
+    public double calculateRenovationCost(double costXm4){
+        double pricePool = 200 * poolQty;
+        double priceGarage = 300 * garageQty;
+        double priceBasement = 500 * basementQyy;
 
-        double priceReform = 0;
-        boolean
-
-        priceReform = super.calculateRenovationCost(false, costXm4);
-        if (ba)
+        double priceReform = super.calculateRenovationCost(false, costXm4);
+        priceReform = priceReform + pricePool + priceGarage + priceBasement;
 
         return priceReform;
     }
