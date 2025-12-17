@@ -1,11 +1,15 @@
 package com.example.apartment_predictor.model;
 
+<<<<<<< HEAD
 import jakarta.persistence.Id;
 
+=======
+>>>>>>> 07e2c87d814e0ab2b303641bfd3af0f8560a24a6
 import java.util.UUID;
 
 public abstract class Property {
 
+<<<<<<< HEAD
     @Id
     private String id;
     private double area;
@@ -40,4 +44,12 @@ public abstract class Property {
 
 
 
+=======
+    protected String id;
+    protected double area;
+    protected int locationRating;
+
+
+    public abstract double calculateRenovationCost( double costXm4);
+>>>>>>> 07e2c87d814e0ab2b303641bfd3af0f8560a24a6
 }

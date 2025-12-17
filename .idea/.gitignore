@@ -1,6 +1,7 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+<<<<<<< HEAD
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files
@@ -10,3 +11,5 @@
 Maven_*.*
 
 /uiDesigner.xml
+=======
+>>>>>>> 07e2c87d814e0ab2b303641bfd3af0f8560a24a6
