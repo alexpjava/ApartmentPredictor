@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-public class Apartment {
+public class Apartment extends Property {
 
     @Id
     protected String id;
     private Long price;
-    private Integer area;
+    //private Integer area;
     private Integer bedrooms;
     private Integer bathrooms;
     private Integer stories;
@@ -24,6 +24,7 @@ public class Apartment {
     private Integer parking;
     private String prefarea;
     private String furnishingstatus;
+    private boolean balcony;
 
     @OneToMany(
             mappedBy = "apartment",
@@ -33,17 +34,14 @@ public class Apartment {
 
     // Default constructor
     public Apartment() {
-        this.id = UUID.randomUUID().toString();
+        this.id = super.id;
     }
 
     // Constructor with all fields
-    public Apartment(Long price, Integer area, Integer bedrooms, Integer bathrooms, 
-                    Integer stories, String mainroad, String guestroom, String basement,
-                    String hotwaterheating, String airconditioning,
-                    Integer parking, String prefarea, String furnishingstatus) {
-        this.id = UUID.randomUUID().toString();
+
+    public Apartment(String id, Long price, Integer bedrooms, Integer bathrooms, Integer stories, String mainroad, String guestroom, String basement, String hotwaterheating, String airconditioning, Integer parking, String prefarea, String furnishingstatus, boolean balcony, List<Review> reviews) {
+        this.id = id;
         this.price = price;
-        this.area = area;
         this.bedrooms = bedrooms;
         this.bathrooms = bathrooms;
         this.stories = stories;
@@ -55,7 +53,10 @@ public class Apartment {
         this.parking = parking;
         this.prefarea = prefarea;
         this.furnishingstatus = furnishingstatus;
+        this.balcony = balcony;
+        this.reviews = reviews;
     }
+
 
     // helpers
 
@@ -79,12 +80,12 @@ public class Apartment {
         this.price = price;
     }
 
-    public Integer getArea() {
-        return area;
+    public double getArea() {
+        return super.area;
     }
 
-    public void setArea(Integer area) {
-        this.area = area;
+    public void setArea(double area) {
+        this.area = super.area;
     }
 
     public Integer getBedrooms() {
@@ -197,7 +198,7 @@ public class Apartment {
         return "Apartment{" +
                 "id=" + id +
                 ", price=" + price +
-                ", area=" + area +
+                ", area=" + super.area +
                 ", bedrooms=" + bedrooms +
                 ", bathrooms=" + bathrooms +
                 ", stories=" + stories +
@@ -214,10 +215,10 @@ public class Apartment {
     }
 
     //METODES
+    @Override
+    public double calculateRenovationCost(double costXm4){
 
-    public double calculateRenovationCost(boolean balcony, double costXm4){
-
-       double priceReform = costXm4 * area;
+       double priceReform = costXm4 * super.area;
        if (balcony){
           priceReform = priceReform * 1.5;
        }

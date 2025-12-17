@@ -1,9 +1,15 @@
 package com.example.apartment_predictor.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.util.UUID;
 
+@Entity
 public class House extends Apartment {
 
+    @Id
+    protected String id;
     private int garageQty;
     private String roofType;
     private String garden;
@@ -80,7 +86,7 @@ public class House extends Apartment {
         double priceGarage = 300 * garageQty;
         double priceBasement = 500 * basementQyy;
 
-        double priceReform = super.calculateRenovationCost(false, costXm4);
+        double priceReform = super.calculateRenovationCost(costXm4);
         priceReform = priceReform + pricePool + priceGarage + priceBasement;
 
         return priceReform;
