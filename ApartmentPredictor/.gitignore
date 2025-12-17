@@ -31,6 +31,12 @@ build/
 
 ### VS Code ###
 .vscode/
+.idea/
+ui*.*
+/shelf/
+/workspace.xml
+/uiDesigner.xml
+/.idea/uiDesigner.xml
 *.idea
 *.idea/
 ui*.*
