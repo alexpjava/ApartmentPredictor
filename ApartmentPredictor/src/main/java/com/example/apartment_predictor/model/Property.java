@@ -36,7 +36,7 @@ public abstract class Property {
      *
      * @return the calculated property price
      */
-    public abstract double calculatePrice();
+    //public abstract double calculatePrice();
 
 
 
